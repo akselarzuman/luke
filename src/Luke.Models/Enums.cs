@@ -5,4 +5,11 @@
         SIMPLE,
         CRON
     }
+
+    public enum IntervalType
+    {
+        SEC,
+        MIN,
+        HOUR
+    }
 }

@@ -8,5 +8,7 @@
         public ScheduleType ScheduleType { get; set; }
         public bool IsRepeatForever { get; set; }
         public string CronString { get; set; }
+        public IntervalType IntervalType { get; set; }
+        public short Interval { get; set; }
     }
 }
