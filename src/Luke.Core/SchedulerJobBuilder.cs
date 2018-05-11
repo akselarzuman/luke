@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Luke.Core.Base;
@@ -31,7 +32,15 @@ namespace Luke.Core
 
         public async Task ExecuteAsync<T>(Assembly assembly) where T : BaseJob
         {
-            throw new NotImplementedException();
+            if (assembly == null)
+            {
+                throw new AssemblyNotFoundException();
+            }
+
+            Type type = typeof(T);
+            Type jobsType = assembly.GetTypes().FirstOrDefault(t => t.IsClass && type.IsAssignableFrom(t));
+
+
         }
     }
 }

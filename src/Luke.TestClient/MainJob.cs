@@ -1,23 +1,21 @@
 ﻿using System.Threading.Tasks;
+using Luke.Core.Base;
 using Luke.Core.Contracts;
 using Quartz;
+using Sample.DI;
 
 namespace Sample
 {
     public class MainJob : IJob
     {
-        private readonly ISchedulerJobBuilder _schedulerJobBuilder;
-
-        public MainJob(ISchedulerJobBuilder schedulerJobBuilder)
-        {
-            _schedulerJobBuilder = schedulerJobBuilder;
-        }
-
         public async Task Execute(IJobExecutionContext context)
         {
-            string path = string.Empty;
+            ISchedulerJobBuilder schedulerJobBuilder = DependencyFactory.Instance.Resolve<ISchedulerJobBuilder>();
+
+            string path = @"C:\Users\Aksel Arzuman\Documents\Visual Studio Code\LukeTest\bin\Debug\netstandard2.0\LukeTest.dll";
             
-            await _schedulerJobBuilder.BuildAsync(path);
+            var assembly = await schedulerJobBuilder.BuildAsync(path);
+            await schedulerJobBuilder.ExecuteAsync<BaseJob>(assembly);
         }
     }
 }

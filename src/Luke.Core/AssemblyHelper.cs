@@ -46,22 +46,14 @@ namespace Luke.Core
                 throw new ParameterRequiredException(nameof(location));
             }
 
-            Assembly assembly = Assembly.ReflectionOnlyLoadFrom(location);
+            Assembly assembly = Assembly.LoadFile(location);
 
             if (assembly == null)
             {
                 throw new AssemblyNotFoundException();
             }
 
-            foreach (var typeInfo in assembly.DefinedTypes)
-            {
-                if (typeInfo.ImplementedInterfaces.Contains(typeof(T)))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return assembly.GetTypes().Any(m => m.IsClass && typeof(T).IsAssignableFrom(m));
         }
     }
 }
