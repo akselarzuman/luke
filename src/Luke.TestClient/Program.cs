@@ -1,6 +1,5 @@
 ﻿using System;
 using Quartz;
-using Quartz.Impl;
 using Sample.DI;
 
 namespace Sample
@@ -12,7 +11,7 @@ namespace Sample
         public static void Main(string[] args)
         {
             DependencyFactory.Instance.RegisterDependencies();
-            ISchedulerFactory schedulerFactory = new StdSchedulerFactory();
+            ISchedulerFactory schedulerFactory = DependencyFactory.Instance.Resolve<ISchedulerFactory>();
             _scheduler = schedulerFactory.GetScheduler().GetAwaiter().GetResult();
             _scheduler.Start();
 
