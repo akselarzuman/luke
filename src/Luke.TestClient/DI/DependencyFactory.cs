@@ -1,6 +1,8 @@
 ﻿using Luke.Core;
 using Luke.Core.Contracts;
 using Microsoft.Extensions.DependencyInjection;
+using Quartz;
+using Quartz.Impl;
 
 namespace Sample.DI
 {
@@ -20,7 +22,7 @@ namespace Sample.DI
             serviceCollection.AddTransient<IAssemblyDownloader, AssemblyDownloader>();
             serviceCollection.AddTransient<IAssemblyHelper, AssemblyHelper>();
             serviceCollection.AddTransient<ISchedulerJobBuilder, SchedulerJobBuilder>();
-            //            serviceCollection.AddTransient<IJob, MainJob>();
+            serviceCollection.AddTransient<ISchedulerFactory, StdSchedulerFactory>();
             _serviceProvider = serviceCollection.BuildServiceProvider();
         }
 
