@@ -14,7 +14,7 @@ namespace Sample
 
             string path = @"C:\Users\Aksel Arzuman\Documents\Visual Studio Code\LukeTest\bin\Debug\netstandard2.0\LukeTest.dll";
             
-            var assembly = await schedulerJobBuilder.BuildAsync(path);
+            var assembly = await schedulerJobBuilder.BuildAsync<BaseJob>(path);
             await schedulerJobBuilder.ExecuteAsync<BaseJob>(assembly);
         }
     }

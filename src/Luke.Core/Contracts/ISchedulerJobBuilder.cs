@@ -1,12 +1,11 @@
 ﻿using Luke.Core.Base;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Luke.Core.Contracts
 {
     public interface ISchedulerJobBuilder
     {
-        Task<Assembly> BuildAsync(string path);
-        Task ExecuteAsync<T>(Assembly assembly) where T : BaseJob;
+        Task<BaseJob> BuildAsync<T>(string path) where T : BaseJob;
+        Task ExecuteAsync<T>(BaseJob baseJob) where T : BaseJob;
     }
 }
