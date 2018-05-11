@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -10,14 +11,14 @@ namespace Luke.Core
 {
     public class AssemblyHelper : IAssemblyHelper
     {
-        private readonly Func<string, IAssemblyLoader> _assemblyLoader;
+        private readonly IAssemblyDownloader _assemblyDownloader;
 
-        public AssemblyHelper(Func<string, IAssemblyLoader> assemblyLoader)
+        public AssemblyHelper(IAssemblyDownloader assemblyDownloader)
         {
-            _assemblyLoader = assemblyLoader;
+            _assemblyDownloader = assemblyDownloader;
         }
 
-        public async Task<Assembly> LoadAsync(string path)
+        public async Task<string> LoadAsync(string path)
         {
             if (string.IsNullOrEmpty(path))
             {
@@ -26,12 +27,27 @@ namespace Luke.Core
 
             int lastIndex = path.LastIndexOf("/", StringComparison.Ordinal) + 1;
             string filename = path.Substring(lastIndex, path.Length - lastIndex);
+            string location = path;
 
-            return await _assemblyLoader(path).LoadAsync(filename, path);
+            if (path.StartsWith("http"))
+            {
+                location = $"{Directory.GetCurrentDirectory()}/{location}";
+
+                await _assemblyDownloader.DownloadAsync(location, path);
+            }
+
+            return location;
         }
 
-        public bool IsValidAssembly<T>(Assembly assembly) where T : BaseJob
+        public bool IsValidAssembly<T>(string location) where T : BaseJob
         {
+            if (string.IsNullOrEmpty(location))
+            {
+                throw new ParameterRequiredException(nameof(location));
+            }
+
+            Assembly assembly = Assembly.ReflectionOnlyLoadFrom(location);
+
             if (assembly == null)
             {
                 throw new AssemblyNotFoundException();
@@ -46,16 +62,6 @@ namespace Luke.Core
             }
 
             return false;
-        }
-
-        public async Task RemoveAssemblyAsync(string path)
-        {
-            if (string.IsNullOrEmpty(path))
-            {
-                throw new ParameterRequiredException(nameof(path));
-            }
-
-            throw new NotImplementedException();
         }
     }
 }

@@ -6,8 +6,7 @@ namespace Luke.Core.Contracts
 {
     public interface IAssemblyHelper
     {
-        Task<Assembly> LoadAsync(string path);
-        bool IsValidAssembly<T>(Assembly assembly) where T : BaseJob;
-        Task RemoveAssemblyAsync(string path);
+        Task<string> LoadAsync(string path);
+        bool IsValidAssembly<T>(string location) where T : BaseJob;
     }
 }

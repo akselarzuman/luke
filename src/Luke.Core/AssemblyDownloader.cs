@@ -1,28 +1,25 @@
 ﻿using System.IO;
 using System.Net.Http;
-using System.Reflection;
 using System.Threading.Tasks;
 using Luke.Core.Contracts;
 using Luke.Exceptions;
 
 namespace Luke.Core
 {
-    public class RemoteAssemblyLoader : IAssemblyLoader
+    public class AssemblyDownloader : IAssemblyDownloader
     {
-        public async Task<Assembly> LoadAsync(string fileName, string path)
+        public async Task DownloadAsync(string location, string path)
         {
-            if (string.IsNullOrEmpty(fileName))
+            if (string.IsNullOrEmpty(location))
             {
-                throw new ParameterRequiredException(nameof(fileName));
+                throw new ParameterRequiredException(nameof(location));
             }
 
             if (string.IsNullOrEmpty(path))
             {
                 throw new ParameterRequiredException(nameof(path));
             }
-
-            string location = $"{Directory.GetCurrentDirectory()}/{fileName}";
-
+            
             using (HttpClient httpClient = new HttpClient())
             {
                 var response = await httpClient.GetAsync(path);
@@ -35,8 +32,6 @@ namespace Luke.Core
                     }
                 }
             }
-
-            return Assembly.LoadFile(location);
         }
     }
 }
