@@ -21,7 +21,7 @@ namespace Luke.Core
             _schedulerFactory = schedulerFactory;
         }
 
-        public async Task<BaseJob> BuildAsync<T>(string path) where T : BaseJob
+        public async Task<BaseJob> BuildAsync(string path)
         {
             string location = await _assemblyHelper.LoadAsync(path);
             bool isValid = _assemblyHelper.IsValidAssembly<BaseJob>(location);
@@ -38,8 +38,7 @@ namespace Luke.Core
                 throw new AssemblyNotFoundException();
             }
 
-            Type type = typeof(T);
-            Type jobsType = assembly.GetTypes().FirstOrDefault(t => t.IsClass && type.IsAssignableFrom(t));
+            Type jobsType = assembly.GetTypes().FirstOrDefault(t => t.IsClass && typeof(BaseJob).IsAssignableFrom(t));
             BaseJob baseJob = (BaseJob)Activator.CreateInstance(jobsType);
 
             if (baseJob == null || baseJob.LukeModel == null)
@@ -50,7 +49,7 @@ namespace Luke.Core
             return baseJob;
         }
 
-        public async Task ExecuteAsync<T>(BaseJob baseJob) where T : BaseJob
+        public async Task ExecuteAsync(BaseJob baseJob)
         {
             if (baseJob == null || baseJob.LukeModel == null)
             {
@@ -62,7 +61,7 @@ namespace Luke.Core
 
             try
             {
-                var job = JobBuilder.Create<T>()
+                var job = JobBuilder.Create(baseJob.GetType())
                     .WithIdentity(lukeModel.IdentityName, lukeModel.IdentityGroup)
                     .Build();
 
