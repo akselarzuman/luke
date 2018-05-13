@@ -19,6 +19,11 @@ namespace Luke.Sample
             ScheduleType = ScheduleType.SIMPLE
         };
 
+        public override Task RegisterDependencies()
+        {
+            return Task.CompletedTask;
+        }
+
         public override Task Execute(IJobExecutionContext context)
         {
             System.Console.WriteLine(DateTime.Now);
