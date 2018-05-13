@@ -1,7 +1,19 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <ItemGroup>
+  <!--<ItemGroup>
     <ProjectReference Include="..\..\src\Luke.Core\Luke.Core.csproj" />
+    <ProjectReference Include="..\..\src\Luke.Models\Luke.Models.csproj" />
+  </ItemGroup>-->
+  <ItemGroup>
+    <Reference Include="Luke.Core">
+      <HintPath>..\..\src\Luke.Core\bin\Debug\netstandard2.0\Luke.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Luke.Exceptions">
+      <HintPath>..\..\src\Luke.Core\bin\Debug\netstandard2.0\Luke.Exceptions.dll</HintPath>
+    </Reference>
+    <Reference Include="Luke.Models">
+      <HintPath>..\..\src\Luke.Core\bin\Debug\netstandard2.0\Luke.Models.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Quartz" Version="3.0.4" />

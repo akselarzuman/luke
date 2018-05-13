@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Luke.Core.Base;
 using Luke.Core.Contracts;
 using Quartz;
 using Luke.Sample.DI;
+using System.IO;
 
 namespace Luke.Sample
 {
@@ -12,8 +12,8 @@ namespace Luke.Sample
         {
             ISchedulerJobBuilder schedulerJobBuilder = DependencyFactory.Instance.Resolve<ISchedulerJobBuilder>();
 
-            string path = @"..\..\Luke.SampleJob\bin\Debug\netstandard2.0\Luke.SampleJob.dll";
-            
+            string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\Luke.SampleJob\bin\Debug\netstandard2.0\Luke.SampleJob.dll"));
+
             var assembly = await schedulerJobBuilder.BuildAsync(path);
             await schedulerJobBuilder.ExecuteAsync(assembly);
         }
