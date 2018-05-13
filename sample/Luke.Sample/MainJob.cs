@@ -2,9 +2,9 @@
 using Luke.Core.Base;
 using Luke.Core.Contracts;
 using Quartz;
-using Sample.DI;
+using Luke.Sample.DI;
 
-namespace Sample
+namespace Luke.Sample
 {
     public class MainJob : IJob
     {
@@ -12,7 +12,7 @@ namespace Sample
         {
             ISchedulerJobBuilder schedulerJobBuilder = DependencyFactory.Instance.Resolve<ISchedulerJobBuilder>();
 
-            string path = @"C:\Users\Aksel Arzuman\Documents\Visual Studio Code\LukeTest\bin\Debug\netstandard2.0\LukeTest.dll";
+            string path = @"..\..\Luke.SampleJob\bin\Debug\netstandard2.0\Luke.SampleJob.dll";
             
             var assembly = await schedulerJobBuilder.BuildAsync(path);
             await schedulerJobBuilder.ExecuteAsync(assembly);

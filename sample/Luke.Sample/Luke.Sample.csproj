@@ -8,6 +8,6 @@
     <PackageReference Include="Quartz" Version="3.0.4" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Luke.Core\Luke.Core.csproj" />
+    <ProjectReference Include="..\..\src\Luke.Core\Luke.Core.csproj" />
   </ItemGroup>
 </Project>

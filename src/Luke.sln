@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample", "Luke.TestClient\Sample.csproj", "{6F12EBB8-764B-48B8-B50A-3CA3F66AAD13}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luke.Core", "Luke.Core\Luke.Core.csproj", "{1592D57D-EFA6-4A42-9E6D-F4F1F0F240A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luke.Exceptions", "Luke.Exceptions\Luke.Exceptions.csproj", "{4747E16C-7232-47DC-87E6-1A08756DE31E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luke.Exceptions", "Luke.Exceptions\Luke.Exceptions.csproj", "{4747E16C-7232-47DC-87E6-1A08756DE31E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luke.Models", "Luke.Models\Luke.Models.csproj", "{E9C55079-0E13-48BE-9340-8BBED1FDA7EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luke.Models", "Luke.Models\Luke.Models.csproj", "{E9C55079-0E13-48BE-9340-8BBED1FDA7EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6F12EBB8-764B-48B8-B50A-3CA3F66AAD13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6F12EBB8-764B-48B8-B50A-3CA3F66AAD13}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6F12EBB8-764B-48B8-B50A-3CA3F66AAD13}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6F12EBB8-764B-48B8-B50A-3CA3F66AAD13}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1592D57D-EFA6-4A42-9E6D-F4F1F0F240A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1592D57D-EFA6-4A42-9E6D-F4F1F0F240A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1592D57D-EFA6-4A42-9E6D-F4F1F0F240A8}.Release|Any CPU.ActiveCfg = Release|Any CPU

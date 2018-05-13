@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Quartz;
 using Quartz.Impl;
 
-namespace Sample.DI
+namespace Luke.Sample.DI
 {
     public class DependencyFactory
     {

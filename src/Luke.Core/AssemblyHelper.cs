@@ -18,6 +18,13 @@ namespace Luke.Core
             _assemblyDownloader = assemblyDownloader;
         }
 
+        public async Task<string> LoadAsync()
+        {
+            // For instance
+
+            return await Task.FromResult(string.Empty);
+        }
+
         public async Task<string> LoadAsync(string path)
         {
             if (string.IsNullOrEmpty(path))
@@ -39,7 +46,14 @@ namespace Luke.Core
             return location;
         }
 
-        public bool IsValidAssembly<T>(string location) where T : BaseJob
+        public async Task<bool> IsValidAssembly()
+        {
+            // For insance
+
+            return await Task.FromResult(true);
+        }
+
+        public async Task<bool> IsValidAssembly(string location)
         {
             if (string.IsNullOrEmpty(location))
             {
@@ -53,7 +67,10 @@ namespace Luke.Core
                 throw new AssemblyNotFoundException();
             }
 
-            return assembly.GetTypes().Any(m => m.IsClass && typeof(T).IsAssignableFrom(m));
+            return await Task.Run(() =>
+            {
+                return assembly.GetTypes().Any(m => m.IsClass && typeof(BaseJob).IsAssignableFrom(m));
+            });
         }
     }
 }

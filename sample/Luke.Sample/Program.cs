@@ -1,8 +1,8 @@
 ﻿using System;
 using Quartz;
-using Sample.DI;
+using Luke.Sample.DI;
 
-namespace Sample
+namespace Luke.Sample
 {
     public class Program
     {

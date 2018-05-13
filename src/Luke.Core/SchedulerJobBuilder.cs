@@ -24,7 +24,7 @@ namespace Luke.Core
         public async Task<BaseJob> BuildAsync(string path)
         {
             string location = await _assemblyHelper.LoadAsync(path);
-            bool isValid = _assemblyHelper.IsValidAssembly<BaseJob>(location);
+            bool isValid = await _assemblyHelper.IsValidAssembly(location);
 
             if (!isValid)
             {
