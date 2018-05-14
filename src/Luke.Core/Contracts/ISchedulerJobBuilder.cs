@@ -5,6 +5,7 @@ namespace Luke.Core.Contracts
 {
     public interface ISchedulerJobBuilder
     {
+        Task<BaseJob> BuildAsync();
         Task<BaseJob> BuildAsync(string path);
         Task ExecuteAsync(BaseJob baseJob);
     }
