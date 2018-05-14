@@ -15,6 +15,7 @@ namespace Luke.Sample
             string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\Luke.SampleJob\bin\Debug\netstandard2.0\Luke.SampleJob.dll"));
 
             var assembly = await schedulerJobBuilder.BuildAsync(path);
+            assembly.RegisterDependencies().GetAwaiter().GetResult();
             await schedulerJobBuilder.ExecuteAsync(assembly);
         }
     }

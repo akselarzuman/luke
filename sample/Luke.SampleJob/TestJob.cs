@@ -3,6 +3,7 @@ using Luke.Core.Base;
 using Quartz;
 using System.Threading.Tasks;
 using Luke.Models;
+using Luke.SampleJob.Contracts;
 
 namespace Luke.SampleJob
 {
@@ -21,12 +22,16 @@ namespace Luke.SampleJob
 
         public override Task RegisterDependencies()
         {
+            DependencyFactory.Instance.RegisterDependencies();
             return Task.CompletedTask;
         }
 
         public override Task Execute(IJobExecutionContext context)
         {
-            System.Console.WriteLine(DateTime.Now);
+            ISampleContract sampleContract = DependencyFactory.Instance.Resolve<ISampleContract>();
+            sampleContract.WriteAsync("Test message.");
+            
+            Console.WriteLine(DateTime.Now);
             return Task.CompletedTask;
         }
     }
