@@ -4,7 +4,7 @@ using Quartz;
 using System.Threading.Tasks;
 using Luke.Models;
 
-namespace Luke.Sample
+namespace Luke.SampleJob
 {
     public class TestJob : BaseJob
     {
