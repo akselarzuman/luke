@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using Luke.Core.Base;
 using Luke.Core.Contracts;
 using Luke.Exceptions;
 using Luke.Models;
@@ -51,7 +53,7 @@ namespace Luke.Core
             foreach (var lukePkgModel in lukePkgModels)
             {
                 string location = lukePkgModel.AssemblyLocation;
-                
+
                 if (lukePkgModel.AssemblyLocation.StartsWith("http"))
                 {
                     location =
@@ -82,7 +84,17 @@ namespace Luke.Core
                 // TODO : create another app domain and see if the assembly is valid
             }
 
-            return Task.FromResult(true);
+            Assembly assembly =
+                Assembly.LoadFile($"{lukeLocationModel.AssemblyLocation}/{lukeLocationModel.AssemblyName}");
+
+            if (assembly == null)
+            {
+                throw new AssemblyNotFoundException();
+            }
+
+            bool isValidAssembly = assembly.GetTypes().Any(m => m.IsClass && typeof(LukeJob).IsAssignableFrom(m));
+
+            return Task.FromResult(isValidAssembly);
         }
 
         public Task Load(LukeLocationModel lukeLocationModel)
@@ -93,14 +105,18 @@ namespace Luke.Core
             }
 
             string[] allDllFiles = Directory.GetFiles(lukeLocationModel.AssemblyLocation, "*.dll");
-            
+
             foreach (string dll in allDllFiles)
             {
                 // TODO : check if assembly already loaded
-                Assembly.LoadFile(dll);
+
+                if (dll != lukeLocationModel.AssemblyName)
+                {
+                    Assembly.LoadFile(dll);
+                }
             }
-            
-            return Task.CompletedTask; 
+
+            return Task.CompletedTask;
         }
     }
 }
