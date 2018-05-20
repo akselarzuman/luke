@@ -3,6 +3,8 @@ using Luke.Core.Contracts;
 using Quartz;
 using Luke.Sample.DI;
 using System.IO;
+using Luke.Models;
+using System.Collections.Generic;
 
 namespace Luke.Sample
 {
@@ -10,14 +12,22 @@ namespace Luke.Sample
     {
         public async Task Execute(IJobExecutionContext context)
         {
-            ILukeBuilder lukeBuilder = DependencyFactory.Instance.Resolve<ILukeBuilder>();
-            ILukeExecutor lukeExecutor = DependencyFactory.Instance.Resolve<ILukeExecutor>();
+            try
+            {
+                ILukeBuilder lukeBuilder = DependencyFactory.Instance.Resolve<ILukeBuilder>();
+                ILukeExecutor lukeExecutor = DependencyFactory.Instance.Resolve<ILukeExecutor>();
 
-            string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\Luke.SampleJob\bin\Debug\netstandard2.0\Luke.SampleJob.dll"));
+                string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "LukePkg.json"));
 
-            var assembly = await schedulerJobBuilder.BuildAsync(path);
-            assembly.RegisterDependencies().GetAwaiter().GetResult();
-            await schedulerJobBuilder.ExecuteAsync(assembly);
+                IEnumerable<LukeLocationModel> lukeLocationModels = await lukeBuilder.BuildAsync(path);
+                //assembly.RegisterDependencies().GetAwaiter().GetResult();
+                await lukeExecutor.ExecuteAsync(lukeLocationModels);
+            }
+            catch (System.Exception ex)
+            {
+                System.Console.WriteLine(ex);
+                throw;
+            }
         }
     }
 }

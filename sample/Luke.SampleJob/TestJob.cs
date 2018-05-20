@@ -7,7 +7,7 @@ using Luke.SampleJob.Contracts;
 
 namespace Luke.SampleJob
 {
-    public class TestJob : BaseJob
+    public class TestJob : LukeJob
     {
         public override LukeModel LukeModel => new LukeModel
         {
