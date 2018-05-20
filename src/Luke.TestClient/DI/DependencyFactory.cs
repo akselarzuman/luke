@@ -20,8 +20,9 @@ namespace Sample.DI
         {
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddTransient<IAssemblyDownloader, AssemblyDownloader>();
-            serviceCollection.AddTransient<IAssemblyHelper, AssemblyHelper>();
-            serviceCollection.AddTransient<ISchedulerJobBuilder, SchedulerJobBuilder>();
+            serviceCollection.AddTransient<ILuker, Luker>();
+            serviceCollection.AddTransient<ILukeBuilder, LukeBuilder>();
+            serviceCollection.AddTransient<ILukeExecutor, LukeExecutor>();
             serviceCollection.AddTransient<ISchedulerFactory, StdSchedulerFactory>();
             _serviceProvider = serviceCollection.BuildServiceProvider();
         }

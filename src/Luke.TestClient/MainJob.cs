@@ -10,12 +10,13 @@ namespace Sample
     {
         public async Task Execute(IJobExecutionContext context)
         {
-            ISchedulerJobBuilder schedulerJobBuilder = DependencyFactory.Instance.Resolve<ISchedulerJobBuilder>();
+            ILukeBuilder lukeBuilder = DependencyFactory.Instance.Resolve<ILukeBuilder>();
+            ILukeExecutor lukeExecutor = DependencyFactory.Instance.Resolve<ILukeExecutor>();
 
             string path = @"C:\Users\Aksel Arzuman\Documents\Visual Studio Code\LukeTest\bin\Debug\netstandard2.0\LukeTest.dll";
             
-            var assembly = await schedulerJobBuilder.BuildAsync(path);
-            await schedulerJobBuilder.ExecuteAsync(assembly);
+            var assembly = await lukeBuilder.BuildAsync(path);
+            await lukeExecutor.ExecuteAsync(assembly);
         }
     }
 }
