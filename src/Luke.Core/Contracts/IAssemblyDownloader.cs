@@ -4,6 +4,6 @@ namespace Luke.Core.Contracts
 {
     public interface IAssemblyDownloader
     {
-        Task DownloadAsync(string location, string path);
+        Task DownloadAsync(string location, string url);
     }
 }

@@ -8,21 +8,21 @@ namespace Luke.Core
 {
     public class AssemblyDownloader : IAssemblyDownloader
     {
-        public async Task DownloadAsync(string location, string path)
+        public async Task DownloadAsync(string location, string url)
         {
             if (string.IsNullOrEmpty(location))
             {
                 throw new ParameterRequiredException(nameof(location));
             }
 
-            if (string.IsNullOrEmpty(path))
+            if (string.IsNullOrEmpty(url))
             {
-                throw new ParameterRequiredException(nameof(path));
+                throw new ParameterRequiredException(nameof(url));
             }
             
             using (HttpClient httpClient = new HttpClient())
             {
-                var response = await httpClient.GetAsync(path);
+                var response = await httpClient.GetAsync(url);
                 response.EnsureSuccessStatusCode();
                 using (var contentStream = await response.Content.ReadAsStreamAsync())
                 {
