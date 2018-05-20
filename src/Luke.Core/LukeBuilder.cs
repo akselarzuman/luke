@@ -11,21 +11,20 @@ namespace Luke.Core
     public class LukeBuilder : ILukeBuilder
     {
         private readonly ILuker _luker;
-        private readonly ISchedulerFactory _schedulerFactory;
-
-        public LukeBuilder(ILuker luker, ISchedulerFactory schedulerFactory)
+        
+        public LukeBuilder(ILuker luker)
         {
             _luker = luker;
-            _schedulerFactory = schedulerFactory;
         }
         
-        public async Task BuildAsync(string path)
+        public async Task<IEnumerable<LukeLocationModel>> BuildAsync(string path)
         {
             if (string.IsNullOrEmpty(path))
             {
                 throw new ParameterRequiredException(nameof(path));
             }
             
+            var lukeLocations = new List<LukeLocationModel>();
             IEnumerable<LukePkgModel> lukePkgModels = await _luker.ReadPkgAsync(path);
             IEnumerable<LukeLocationModel> lukeLocationModels = await _luker.LocateAsync(lukePkgModels);
 
@@ -34,9 +33,12 @@ namespace Luke.Core
                 bool isValidAssembly = await _luker.IsValidAssembly(lukeLocationModel);
                 if (isValidAssembly)
                 {
+                    lukeLocations.Add(lukeLocationModel);
                     await _luker.Load(lukeLocationModel);
                 }
             }
+
+            return lukeLocations;
         }
     }
 }

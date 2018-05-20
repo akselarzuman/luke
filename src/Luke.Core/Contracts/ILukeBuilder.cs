@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
-using Luke.Core.Base;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Luke.Models;
 
 namespace Luke.Core.Contracts
 {
     public interface ILukeBuilder
     {
-        Task BuildAsync(string path);
+        Task<IEnumerable<LukeLocationModel>> BuildAsync(string path);
     }
 }
