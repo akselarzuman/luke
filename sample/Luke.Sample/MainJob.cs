@@ -20,7 +20,6 @@ namespace Luke.Sample
                 string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "LukePkg.json"));
 
                 IEnumerable<LukeLocationModel> lukeLocationModels = await lukeBuilder.BuildAsync(path);
-                //assembly.RegisterDependencies().GetAwaiter().GetResult();
                 await lukeExecutor.ExecuteAsync(lukeLocationModels);
             }
             catch (System.Exception ex)

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -110,9 +111,17 @@ namespace Luke.Core
             {
                 // TODO : check if assembly already loaded
 
-                if (dll != lukeLocationModel.AssemblyName)
+                // it is loaded in IsValid method
+                if (!dll.Contains(lukeLocationModel.AssemblyName))
                 {
-                    Assembly.LoadFile(dll);
+                    Assembly assembly = Assembly.LoadFile(dll.Replace("\\", "/"));
+
+                    using (var reader = new StreamReader(dll))
+                    {
+                        byte[] byteArray = new byte[reader.BaseStream.Length];
+                        reader.BaseStream.Read(byteArray, 0, Convert.ToInt32(reader.BaseStream.Length));
+                        AppDomain.CurrentDomain.Load(byteArray);
+                    }
                 }
             }
 

@@ -2,5 +2,9 @@
   {
     "AssemblyName": "Luke.SampleJob.dll",
     "AssemblyLocation": "C:/Users/Aksel Arzuman/Documents/GitHub/luke/sample/Luke.SampleJob/bin/Debug/netstandard2.0"
+  },
+  {
+    "AssemblyName": "Luke.SampleJob.Autofac.dll",
+    "AssemblyLocation": "C:/Users/Aksel Arzuman/Documents/GitHub/luke/sample/Luke.SampleJob.Autofac/bin/Release/netstandard2.0/publish"
   }
 ]

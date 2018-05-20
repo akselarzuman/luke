@@ -2,9 +2,9 @@
 using Quartz;
 using System.Threading.Tasks;
 using Luke.Models;
-using Luke.SampleJob.Contracts;
+using Luke.SampleJob.Autofac.Contracts;
 
-namespace Luke.SampleJob
+namespace Luke.SampleJob.Autofac
 {
     public class TestJob : LukeJob
     {
@@ -28,7 +28,7 @@ namespace Luke.SampleJob
         public override Task Execute(IJobExecutionContext context)
         {
             ISampleContract sampleContract = DependencyFactory.Instance.Resolve<ISampleContract>();
-            sampleContract.WriteAsync("Test message from Luke.SampleJob");
+            sampleContract.WriteAsync("Test message from Luke.SampleJob.Autofac");
             
             return Task.CompletedTask;
         }
