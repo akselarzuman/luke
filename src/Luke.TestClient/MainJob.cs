@@ -13,7 +13,7 @@ namespace Sample
             ILukeBuilder lukeBuilder = DependencyFactory.Instance.Resolve<ILukeBuilder>();
             ILukeExecutor lukeExecutor = DependencyFactory.Instance.Resolve<ILukeExecutor>();
 
-            string path = @"C:\Users\Aksel Arzuman\Documents\Visual Studio Code\LukeTest\bin\Debug\netstandard2.0\LukeTest.dll";
+            string path = @"C:\Users\Aksel Arzuman\Documents\GitHub\luke\src\Luke.TestClient\LukePkgConfig.json";
             
             var assembly = await lukeBuilder.BuildAsync(path);
             await lukeExecutor.ExecuteAsync(assembly);
