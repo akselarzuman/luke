@@ -21,10 +21,10 @@ namespace Luke.Core
             _schedulerFactory = schedulerFactory;
         }
 
-        public async Task<BaseJob> BuildAsync(string path)
+        public async Task<LukeJob> BuildAsync(string path)
         {
             string location = await _assemblyHelper.LoadAsync(path);
-            bool isValid = _assemblyHelper.IsValidAssembly<BaseJob>(location);
+            bool isValid = _assemblyHelper.IsValidAssembly<LukeJob>(location);
 
             if (!isValid)
             {
@@ -38,30 +38,30 @@ namespace Luke.Core
                 throw new AssemblyNotFoundException();
             }
 
-            Type jobsType = assembly.GetTypes().FirstOrDefault(t => t.IsClass && typeof(BaseJob).IsAssignableFrom(t));
-            BaseJob baseJob = (BaseJob)Activator.CreateInstance(jobsType);
+            Type jobsType = assembly.GetTypes().FirstOrDefault(t => t.IsClass && typeof(LukeJob).IsAssignableFrom(t));
+            LukeJob lukeJob = (LukeJob)Activator.CreateInstance(jobsType);
 
-            if (baseJob == null || baseJob.LukeModel == null)
+            if (lukeJob == null || lukeJob.LukeModel == null)
             {
                 throw new InvalidAssemblyException(assembly.FullName);
             }
 
-            return baseJob;
+            return lukeJob;
         }
 
-        public async Task ExecuteAsync(BaseJob baseJob)
+        public async Task ExecuteAsync(LukeJob lukeJob)
         {
-            if (baseJob == null || baseJob.LukeModel == null)
+            if (lukeJob == null || lukeJob.LukeModel == null)
             {
                 throw new InvalidAssemblyException();
             }
 
-            LukeModel lukeModel = baseJob.LukeModel;
+            LukeModel lukeModel = lukeJob.LukeModel;
             IScheduler scheduler = await _schedulerFactory.GetScheduler();
 
             try
             {
-                var job = JobBuilder.Create(baseJob.GetType())
+                var job = JobBuilder.Create(lukeJob.GetType())
                     .WithIdentity(lukeModel.IdentityName, lukeModel.IdentityGroup)
                     .Build();
 

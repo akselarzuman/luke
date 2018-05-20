@@ -4,7 +4,7 @@ using Quartz;
 
 namespace Luke.Core.Base
 {
-    public abstract class BaseJob : IJob
+    public abstract class LukeJob : IJob
     {
         public abstract LukeModel LukeModel { get; }
 

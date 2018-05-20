@@ -39,7 +39,7 @@ namespace Luke.Core
             return location;
         }
 
-        public bool IsValidAssembly<T>(string location) where T : BaseJob
+        public bool IsValidAssembly<T>(string location) where T : LukeJob
         {
             if (string.IsNullOrEmpty(location))
             {
