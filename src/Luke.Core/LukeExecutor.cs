@@ -34,12 +34,14 @@ namespace Luke.Core
                     throw new InvalidAssemblyException(assembly.FullName);
                 }
 
-                LukeJob lukeJob = (LukeJob) Activator.CreateInstance(jobsType);
+                LukeJob lukeJob = (LukeJob)Activator.CreateInstance(jobsType);
 
                 if (lukeJob.LukeModel == null)
                 {
                     throw new InvalidAssemblyException(assembly.FullName);
                 }
+
+                await lukeJob.RegisterDependencies();
 
                 LukeModel lukeModel = lukeJob.LukeModel;
                 IScheduler scheduler = await _schedulerFactory.GetScheduler();
