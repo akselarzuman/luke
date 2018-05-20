@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
+    <PackageReference Include="Quartz" Version="3.0.4" />
+  </ItemGroup>
+  <!--<ItemGroup>
+    <ProjectReference Include="..\..\src\Luke.Core\Luke.Core.csproj" />
+    <ProjectReference Include="..\..\src\Luke.Exceptions\Luke.Exceptions.csproj" />
+  </ItemGroup>-->
+  <ItemGroup>
+    <Reference Include="Luke.Core">
+      <HintPath>..\..\src\Luke.Core\bin\Debug\netstandard2.0\Luke.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Luke.Exceptions">
+      <HintPath>..\..\src\Luke.Core\bin\Debug\netstandard2.0\Luke.Exceptions.dll</HintPath>
+    </Reference>
+    <Reference Include="Luke.Models">
+      <HintPath>..\..\src\Luke.Core\bin\Debug\netstandard2.0\Luke.Models.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

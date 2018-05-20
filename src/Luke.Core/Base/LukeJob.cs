@@ -8,6 +8,8 @@ namespace Luke.Core.Base
     {
         public abstract LukeModel LukeModel { get; }
 
+        public abstract Task RegisterDependencies();
+
         public abstract Task Execute(IJobExecutionContext context);
     }
 }
