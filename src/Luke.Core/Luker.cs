@@ -105,22 +105,26 @@ namespace Luke.Core
                 throw new ParameterRequiredException(nameof(lukeLocationModel));
             }
 
-            string[] allDllFiles = Directory.GetFiles(lukeLocationModel.AssemblyLocation, "*.dll");
+            AssemblyLoader assemblyLoader = new AssemblyLoader(lukeLocationModel.AssemblyLocation);
 
-            foreach (string dll in allDllFiles)
+            DirectoryInfo directoryInfo = new DirectoryInfo(lukeLocationModel.AssemblyLocation);
+            FileInfo[] files = directoryInfo.GetFiles("*.dll");
+            //string[] allDllFiles = Directory.GetFiles(lukeLocationModel.AssemblyLocation, "*.dll");
+
+            foreach (FileInfo fileInfo in files)
             {
                 // TODO : check if assembly already loaded
 
                 // it is loaded in IsValid method
-                if (!dll.Contains(lukeLocationModel.AssemblyName))
+                if (fileInfo.Name != lukeLocationModel.AssemblyName)
                 {
-                    Assembly assembly = Assembly.LoadFile(dll.Replace("\\", "/"));
-
-                    using (var reader = new StreamReader(dll))
+                    try
                     {
-                        byte[] byteArray = new byte[reader.BaseStream.Length];
-                        reader.BaseStream.Read(byteArray, 0, Convert.ToInt32(reader.BaseStream.Length));
-                        AppDomain.CurrentDomain.Load(byteArray);
+                        assemblyLoader.Load(fileInfo.Name);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
                     }
                 }
             }
