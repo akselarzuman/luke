@@ -24,10 +24,9 @@ namespace Luke.Core
         {
             foreach (LukeLocationModel lukeLocationModel in lukeLocationModels)
             {
-                Assembly assembly =
-                    Assembly.LoadFile($"{lukeLocationModel.AssemblyLocation}/{lukeLocationModel.AssemblyName}");
-                Type jobsType = assembly.GetTypes()
-                    .FirstOrDefault(t => t.IsClass && typeof(LukeJob).IsAssignableFrom(t));
+                AssemblyLoader assemblyLoader = new AssemblyLoader(lukeLocationModel.AssemblyLocation);
+                Assembly assembly = assemblyLoader.Load(lukeLocationModel.AssemblyName);
+                Type jobsType = assembly.GetTypes().FirstOrDefault(t => t.IsClass && typeof(LukeJob).IsAssignableFrom(t));
 
                 if (jobsType == null)
                 {
