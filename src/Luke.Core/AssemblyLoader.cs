@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyModel;
 
 namespace Luke.Core
 {
-    public class AssemblyLoader : AssemblyLoadContext
+    internal class AssemblyLoader : AssemblyLoadContext
     {
         private readonly string _directoryPath;
 
@@ -59,11 +59,11 @@ namespace Luke.Core
             return Assembly.Load(assemblyName);
         }
 
-        public void Load(string assemblyName)
+        public Assembly Load(string assemblyName)
         {
             assemblyName = assemblyName.EndsWith(".dll") ? assemblyName : $"{assemblyName}.dll";
 
-            Load(new AssemblyName(assemblyName));
+            return Load(new AssemblyName(assemblyName));
         }
     }
 }

@@ -85,8 +85,8 @@ namespace Luke.Core
                 // TODO : create another app domain and see if the assembly is valid
             }
 
-            Assembly assembly =
-                Assembly.LoadFile($"{lukeLocationModel.AssemblyLocation}/{lukeLocationModel.AssemblyName}");
+            AssemblyLoader assemblyLoader = new AssemblyLoader(lukeLocationModel.AssemblyLocation);
+            Assembly assembly = assemblyLoader.Load(lukeLocationModel.AssemblyName);
 
             if (assembly == null)
             {
@@ -109,7 +109,6 @@ namespace Luke.Core
 
             DirectoryInfo directoryInfo = new DirectoryInfo(lukeLocationModel.AssemblyLocation);
             FileInfo[] files = directoryInfo.GetFiles("*.dll");
-            //string[] allDllFiles = Directory.GetFiles(lukeLocationModel.AssemblyLocation, "*.dll");
 
             foreach (FileInfo fileInfo in files)
             {
