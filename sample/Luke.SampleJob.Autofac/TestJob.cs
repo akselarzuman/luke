@@ -10,9 +10,9 @@ namespace Luke.SampleJob.Autofac
     {
         public override LukeModel LukeModel => new LukeModel
         {
-            IdentityName = "test_job",
-            IdentityGroup = "test_group",
-            IdentityTrigger = "test_trigger",
+            IdentityName = "test_job_autofac",
+            IdentityGroup = "test_group_autofac",
+            IdentityTrigger = "test_trigger_autofac",
             Interval = 10,
             IntervalType = IntervalType.SEC,
             IsRepeatForever = true,

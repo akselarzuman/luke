@@ -16,19 +16,24 @@ namespace Luke.Core
 
         protected override Assembly Load(AssemblyName assemblyName)
         {
+            if (assemblyName.Name == "netstandard")
+            {
+                return null;
+            }
+
             var dependencyContext = DependencyContext.Default;
             var compilationLibraries = dependencyContext
                 .CompileLibraries
                 .Where(x => x.Name.Contains(assemblyName.Name))
                 .ToList();
-            
+
             if (compilationLibraries.Count > 0)
             {
                 return Assembly.Load(new AssemblyName(compilationLibraries.First().Name));
             }
 
-            var assemblyFilePath = Path.Combine(_directoryPath, assemblyName.Name);
-            
+            string assemblyFilePath = Path.Combine(_directoryPath, assemblyName.Name.EndsWith(".dll") ? assemblyName.Name : $"{assemblyName.Name}.dll").Replace("\\", "/");
+
             if (File.Exists(assemblyFilePath))
             {
                 return LoadFromAssemblyPath(assemblyFilePath);
@@ -36,7 +41,7 @@ namespace Luke.Core
 
             string dotnetSdkDirectoryPath = @"C:\Program Files\dotnet\store\x64\netcoreapp2.0";
             string runtimeStoreDirectoryPath = @"C:\Program Files\dotnet\store\x64\netcoreapp2.0";
-            
+
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
                 dotnetSdkDirectoryPath = "/usr/local/share/dotnet/dotnet/store/x64/netcoreapp2.0";
@@ -46,11 +51,11 @@ namespace Luke.Core
             {
                 // set dotnet dir path
             }
-            
+
             var dotnetFiles = Directory.GetFiles(dotnetSdkDirectoryPath, assemblyName.Name, SearchOption.AllDirectories);
             var sdkFiles = Directory.GetFiles(runtimeStoreDirectoryPath, assemblyName.Name, SearchOption.AllDirectories);
             var dotnetAssemblyFilePath = dotnetFiles.Concat(sdkFiles).FirstOrDefault();
-            
+
             if (dotnetAssemblyFilePath != null)
             {
                 return LoadFromAssemblyPath(dotnetAssemblyFilePath);
