@@ -9,10 +9,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Quartz" Version="3.0.5" />
   </ItemGroup>
-  <!--<ItemGroup>
-    <ProjectReference Include="..\..\src\Luke.Core\Luke.Core.csproj" />
-    <ProjectReference Include="..\..\src\Luke.Exceptions\Luke.Exceptions.csproj" />
-  </ItemGroup>-->
   <ItemGroup>
     <Reference Include="Luke.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\src\Luke.Core\bin\Debug\netstandard2.0\Luke.Core.dll</HintPath>

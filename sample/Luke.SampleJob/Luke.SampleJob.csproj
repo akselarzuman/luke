@@ -1,8 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <!--<ItemGroup>
-    <ProjectReference Include="..\..\src\Luke.Core\Luke.Core.csproj" />
-    <ProjectReference Include="..\..\src\Luke.Models\Luke.Models.csproj" />
-  </ItemGroup>-->
   <ItemGroup>
     <Reference Include="Luke.Core">
       <HintPath>..\..\src\Luke.Core\bin\Debug\netstandard2.0\Luke.Core.dll</HintPath>
