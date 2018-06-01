@@ -39,8 +39,8 @@ namespace Luke.Core
                 return LoadFromAssemblyPath(assemblyFilePath);
             }
 
-            string dotnetSdkDirectoryPath = @"C:\Program Files\dotnet\store\x64\netcoreapp2.0";
-            string runtimeStoreDirectoryPath = @"C:\Program Files\dotnet\store\x64\netcoreapp2.0";
+            string dotnetSdkDirectoryPath = @"C:\Program Files\dotnet\sdk";
+            string runtimeStoreDirectoryPath = @"C:\Program Files\dotnet\sdk";
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
