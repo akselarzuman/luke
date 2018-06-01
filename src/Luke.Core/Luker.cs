@@ -55,10 +55,9 @@ namespace Luke.Core
             {
                 string location = lukePkgModel.AssemblyLocation;
 
-                if (lukePkgModel.AssemblyLocation.StartsWith("http"))
+                if (Uri.IsWellFormedUriString(lukePkgModel.AssemblyLocation, UriKind.Absolute))
                 {
-                    location =
-                        $"{Directory.GetCurrentDirectory()}/{lukePkgModel.AssemblyName.Replace(".dll", string.Empty)}";
+                    location = $"{Directory.GetCurrentDirectory()}/{lukePkgModel.AssemblyName.Replace(".dll", string.Empty)}";
                     await _assemblyDownloader.DownloadAsync(location, lukePkgModel.AssemblyLocation);
                 }
 

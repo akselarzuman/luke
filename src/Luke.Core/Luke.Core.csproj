@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Luke</AssemblyName>
+    <AssemblyName>Luke.Core</AssemblyName>
     <RootNamespace>Luke.Core</RootNamespace>
     <Version>1.0.0</Version>
     <Title>Luke</Title>
