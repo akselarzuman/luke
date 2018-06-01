@@ -1,5 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+<PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Luke.Exceptions</AssemblyName>
+    <RootNamespace>Luke.Exceptions</RootNamespace>
+    <Version>1.0.0</Version>
+    <Title>Luke.Exceptions</Title>
+    <Authors>Aksel Arzuman</Authors>
+    <Owners>Aksel Arzuman</Owners>
+    <Description>Luke's exceptions</Description>
+    <PackageProjectUrl>https://github.com/akselarzuman/luke</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/akselarzuman/luke/blob/master/LICENSE</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/akselarzuman/luke</RepositoryUrl>
+    <Copyright>Copyright 2018 © Aksel Arzuman</Copyright>
+    <PackageTags>luke, scheduler, scheduler job, dotnet, dotnet core, quartz</PackageTags>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>
 </Project>
