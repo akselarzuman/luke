@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -16,7 +17,7 @@ namespace Luke.Core
 
         protected override Assembly Load(AssemblyName assemblyName)
         {
-            if (assemblyName.Name == "netstandard")
+            if (string.Equals(assemblyName.Name, "netstandard", StringComparison.CurrentCultureIgnoreCase) || string.Equals(assemblyName.Name, "luke", StringComparison.CurrentCultureIgnoreCase))
             {
                 return null;
             }
